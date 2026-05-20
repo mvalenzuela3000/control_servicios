@@ -261,12 +261,12 @@ class ProxyController extends Controller
                 'status' => 'success',
                 'message' => 'Consumo realizado correctamente',
                 'request_id' => $requestId,
-                'servicio' => [
+                /*'servicio' => [
                     'id' => $servicio->id,
                     'nombre' => $servicio->nombre,
                     'metodo_http' => $metodo,
                     'url_destino' => $urlDestino
-                ],
+                ],*/
                 'data' => $cuerpo
             ], $respuesta->getStatusCode());
 
