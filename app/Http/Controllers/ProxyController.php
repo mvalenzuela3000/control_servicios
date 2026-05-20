@@ -303,7 +303,8 @@ class ProxyController extends Controller
                 'status' => 'error',
                 'message' => 'Error al consumir el servicio externo',
                 'request_id' => $requestId,
-                'error' => $e->getMessage(),
+                //'error' => $e->getMessage(),
+                'error'=>$e->getResponse()->getStatusCode()==422?$e->getResponse()->getBody():$e->getMessage(),
                 'response_body' => $detalleRespuesta
             ], $codigo);
 
