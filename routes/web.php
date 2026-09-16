@@ -45,6 +45,28 @@ $router->group(['prefix' => 'api', 'middleware' => 'api.token'], function () use
     $router->post('proxy/jukumari/aduana/alzada', 'ProxyController@aduanaAlzadaJukumari');
     $router->post('proxy/jukumari/aduana/jerarquico', 'ProxyController@aduanaJerarquicoJukumari');
 });
+$router->group(['prefix' => 'api/proxy/ciudadania'], function () use ($router) {
+
+    $router->post('/aprobaciones/individual', [
+        'uses' => 'CiudadaniaDigitalController@aprobarIndividual'
+    ]);
+
+    $router->post('/aprobaciones/multiple', [
+        'uses' => 'CiudadaniaDigitalController@aprobarMultiple'
+    ]);
+
+    $router->post('/documentos/verificar', [
+        'uses' => 'CiudadaniaDigitalController@verificarDocumento'
+    ]);
+
+    $router->get('/aprobaciones/{idTramite}', [
+        'uses' => 'CiudadaniaDigitalController@estado'
+    ]);
+
+    $router->post('/callback', [
+        'uses' => 'CiudadaniaDigitalController@callback'
+    ]);
+});
 $router->get('/test-headers', function (\Illuminate\Http\Request $request) {
     return response()->json([
         'headers' => $request->headers->all(),
