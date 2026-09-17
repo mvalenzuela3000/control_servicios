@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Throwable;
+use Carbon\Carbon;
 
 class ApiTokenMiddleware
 {
@@ -288,7 +289,7 @@ class ApiTokenMiddleware
                 'login_usuario_header' => $this->obtenerPrimerHeader($request, ['X-Login-Usuario', 'Login-Usuario', 'X-Usuario',]),
                 'nombre_usuario_header' => $this->obtenerPrimerHeader($request, ['X-Nombre-Usuario', 'Nombre-Usuario',]),
                 'documento_usuario_header' => $this->obtenerPrimerHeader($request, ['X-Documento-Usuario', 'Documento-Usuario',]),
-                'fecha_acceso' => now(),
+                'fecha_acceso' => Carbon::now(),
                 'ip_acceso' => $request->ip(),
                 'dispositivo_acceso' => $this->limitarTexto($request->userAgent(), 500),
                 'metodo_http' => strtoupper($request->method()),
@@ -298,7 +299,7 @@ class ApiTokenMiddleware
                 'exito' => $exito,
                 'mensaje_error' => $this->limitarTexto($mensajeError, 5000),
                 'request_id' => $this->limitarTexto($requestId, 100),
-                'created_at' => now(),
+                'created_at' => Carbon::now(),
             ]);
         } catch (Throwable $e) {
             /* Un error de auditoría NO debe impedir que el servicio principal responda.*/
