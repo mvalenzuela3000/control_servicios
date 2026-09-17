@@ -17,7 +17,7 @@ class PdfConversionController extends Controller
                     'required|file|mimes:docx|max:30720'
             ]
         );
-        $requestId =(string) Str::uuid();
+        $requestId = (string) ($request->attributes->get('request_id')?: Str::uuid());
         $archivo =$request->file('archivo');
         $nombreOriginal =basename($archivo->getClientOriginalName());
         $baseDir = rtrim((string) env('ONLYOFFICE_SOURCE_DIR', ''),'/\\');
