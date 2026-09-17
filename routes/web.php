@@ -74,3 +74,9 @@ $router->get('/test-headers', function (\Illuminate\Http\Request $request) {
         'http_authorization' => $_SERVER['HTTP_AUTHORIZATION'] ?? null,
     ]);
 });
+$router->post('/api/proxy/documentos/convertir-pdf',
+    [
+        'middleware' => 'api.token',
+        'uses' =>'PdfConversionController@convertir'
+    ]
+);
